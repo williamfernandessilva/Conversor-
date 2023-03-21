@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html> <html lang="en">
+    <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+
+  <title  >  Conversor de Medidas</title>
+  
+</head>
+
+<body style="background-color: black;">
+    
+  <div class="container mt-5">
+    <fieldset style=" width: 60%; padding: 5%; margin-left: auto;
+margin-right: auto; border: 5px solid white; border-radius: 50px;">
+    <h1 style="color:white;" >Conversor de Medidas</h1>
+    <br><br>
+    <form>
+
+      <div class="form-group">
+        <label style="font-size: 25px; color: white;" placeholder="Valor"for="valor">Valor:</label>
+        <input style="font-size: 25px;" type="number" class="form-control" id="valor">
+      </div>
+
+      <div class="form-group">
+        <label style="font-size: 25px;color: white;" for="unidade-entrada">Quero Converter:</label>
+        <select style="font-size: 25px;" class="form-control" id="unidade-entrada">
+          <option  value="metros">Metros</option>
+          <option  value="quilometros">Quilômetros</option>
+          <option  value="centimetro">Centimetro</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label style="font-size: 25px;color: white;" for="unidade-convertida">Para:</label>
+        <select style="font-size: 25px;" class="form-control" id="unidade-convertida">
+          <option value="metros">Metros</option>
+          <option   value="quilometros">Quilômetros</option>
+          <option  value="centimetro">Centimetro</option>
+        </select>
+      </div>
+
+      <button  type ="button" class="btn btn-primary btn-lg" id="converter">Calcular</button>
+    </form>
+    <div class="mt-3">
+      <p style="font-size: 30px;font-family: Arial, Helvetica, sans-serif; color: white;" id="resultado"></p>
+      </fieldset>
+    </div>
+  </div>
+  
+</body>
+
+</html>
+
+<script>
+  function converterUnidades(valor, unidadeEntrada, unidadeconvertida) {
+    if (unidadeEntrada === "metros" && unidadeconvertida === "quilometros") {
+      return valor / 1000;
+    } else if (unidadeEntrada === "metros" && unidadeconvertida === "centimetro") {
+      return valor * 100;
+    } else if (unidadeEntrada === "quilometros" && unidadeconvertida === "metros") {
+      return valor * 1000;
+    } else if (unidadeEntrada === "quilometros" && unidadeconvertida === "centimetro") {
+      return valor * 100000;
+    } else if (unidadeEntrada === "centimetro" && unidadeconvertida === "metros") {
+      return valor / 100;
+    } else if (unidadeEntrada === "centimetro" && unidadeconvertida === "quilometros") {
+      return valor / 100000;
+    } else {
+      return valor;
+    }
+  }
+  const botaoConverter = document.getElementById("converter");
+  const valorInput = document.getElementById("valor");
+  const unidadeEntradaSelect = document.getElementById("unidade-entrada");
+  const unidadeconvertidaSelect = document.getElementById("unidade-convertida");
+  const resultadoP = document.getElementById("resultado");
+
+  botaoConverter.addEventListener("click", function () {
+    const valor = parseFloat(valorInput.value);
+    const unidadeEntrada = unidadeEntradaSelect.value;
+    const unidadeconvertida = unidadeconvertidaSelect.value;
+
+    const valorConvertido = converterUnidades(valor, unidadeEntrada, unidadeconvertida);
+
+    resultadoP.innerHTML = `${valor} ${unidadeEntrada} é igual a ${valorConvertido} ${unidadeconvertida}`;
+  });
+
+</script>
